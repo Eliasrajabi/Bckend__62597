@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import httpService from "../../httpCommon";
 
 import '../../styles/home/Home.css';
-import ProductCard from "../../components/card/ProductCard";
+// import ProductCard from "../../components/card/ProductCard";
+import { addToCart } from "../../utility/CartUtility";
 
 
 document.title = "Home";
@@ -108,9 +109,6 @@ const HomeView = () => {
       })
   }
 
-  function addToCart(arg0: { productId: string; name: string; price: number; quantity: number; }) {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <>
