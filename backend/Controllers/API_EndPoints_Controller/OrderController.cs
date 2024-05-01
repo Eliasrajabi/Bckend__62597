@@ -12,11 +12,10 @@ public class OrderController : ControllerBase
 {
     private readonly ApplicationDB_Context _context;
 
-    public OrderController(ApplicationDB_Context context)
+    public OrderController(ApplicationDB_Context Context)
     {
-        _context = context;
+        _context = Context;
     }
-
     [HttpPost("/orderSubmit")]
     public async Task<IActionResult> SubmitOrder([FromBody] SubmitOrderDto submitOrderDto)
     {

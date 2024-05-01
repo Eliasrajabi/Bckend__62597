@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../../styles/checkout/Payment.css";
 import { Address } from "../Checkout/AddressForm";
 import LoadingSpinner from "../../components/loadingspinner/LoadingSpinner";
+import httpService from "../../httpCommon";
 
+const axios = httpService()
 interface IPaymentDetails {
   giftCard: boolean;
   mobilePay: boolean;
@@ -159,26 +161,33 @@ const Payment = () => {
 
     setShowLoading(true);
 
-    const headers = new Headers();
-    headers.append("Content-Type", "application/json");
-
-    const body = {
-      delivery,
-      cart,
-      paymentDetails,
-      payment,
+    // Prepare data for submission
+    const dto = {
+      Name: delivery.name,
+      City: delivery.city,
+      Address: delivery.address1,
+      Phone: delivery.phone,
+      Email: delivery.email,
+      ZipCode: delivery.zip,
+      Country: delivery.country,
+      products: []
     };
 
-    fetch("https://eornbxupuh9lmd1.m.pipedream.net", {
-      method: "POST",
-      headers,
-      mode: "cors",
-      body: JSON.stringify(body),
-    });
+    try {
+      const response = await axios.post("/orderSubmit", dto);
+      if (response.status === 200) {
+        console.log(response.data);
+        alert("Order submitted successfully!");
+      } else {
+        throw new Error("Unexpected response status: " + response.status);
+      }
+    } catch (error) {
+      // Handle errors
+      console.error("Error submitting payment:", error);
+      alert("An error occurred while submitting payment. Please try again later.");
+    }
 
     setShowLoading(false);
-
-    alert("Payment successful!");
 
     localStorage.removeItem("cart");
 
