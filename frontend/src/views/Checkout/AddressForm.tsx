@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
+import "../../styles/checkout/Addressform.css";
 import { validatePhoneNumber } from "./FormValidation";
 import { validateEmail } from "./FormValidation";
 import { validateVAT } from "./FormValidation";
 import { isValidZip } from "./FormValidation";
-
 import { Address } from "./FormInterface";
 import { Country } from "./FormInterface";
+import FullScreenWrapper from "../../components/container/FullScreenWrapper";
+import FullSizeSpaceContainer from "../../components/container/FullSizeSpaceContainer";
 
 // define the AddressForm  functional component
 const AddressForm: React.FC = () => {
@@ -208,6 +210,8 @@ const AddressForm: React.FC = () => {
   };
 
   return (
+    <FullScreenWrapper>
+    <FullSizeSpaceContainer>
     <div className="form-address-card">
       <h4 className="form-address-card-header">Delivery Address</h4>
       <form className="form-card">
@@ -525,8 +529,15 @@ const AddressForm: React.FC = () => {
           Continue to payment
         </button>
       </div>
-    </div>
-  );
-};
+        </div>
+      
+   
+      </FullSizeSpaceContainer >
+    </FullScreenWrapper>
+      );
+      };
+
+
+
 
 export default AddressForm;

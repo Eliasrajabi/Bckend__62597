@@ -48,24 +48,22 @@ const LoginView = () => {
         };
 
         axios.post('/api/Account/login', userData)
+        
             .then((response) => {
-                console.log('Login Response:', response); // Check the response structure
-                sessionStorage.setItem('token', response.data.token);
-                const isAdmin = response.data.role === 'admin';
-                console.log('User Data:', userData);
-                console.log('isAdmin:', isAdmin); // Check if isAdmin is true or false
-                if (isAdmin) {
-                    sessionStorage.setItem('isAdmin', 'true');
-                    navigate('/dashboardview');
-                } else {
-                    sessionStorage.removeItem('isAdmin');
-                    navigate('/addressform');
-                }
-            }, (error) => {
-                console.log('Login Error:', error); // Check the error response
+                console.log(response);
+                localStorage.setItem('token', response.data.token);
+            })
+            .catch((error) => {
+                console.log(error);
             }
         );
+        if (userData.UserName === 'admin' && userData.Password === 'Admin.store24') {
+            navigate('/dashboard');
+        } else {
+            navigate("/checkout/address");
+        }
     };
+       
 
     return (
         <div className='form-container'>

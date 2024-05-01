@@ -139,6 +139,10 @@ const CheckoutOverview = () => {
     return <LoadingSpinner />;
   }
 
+  const handleLoginForm = () => {
+    window.location.href = '/login';
+  };
+  
   return (
     <FullScreenWrapper>
       <FullSizeSpaceContainer>
@@ -252,7 +256,7 @@ const CheckoutOverview = () => {
                 </div>
               </div>
               <button
-                onClick={() => navigate("/checkout/address")}
+                  onClick={handleLoginForm}
                 className="payment-button"
               >
                 Go to payment
